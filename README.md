@@ -15,8 +15,8 @@ There are a number of solutions employed to host the application. The version of
 the application linked to from the live website is hosted in Azure, as is the
 staging environment.
 
-* [Live](http://beta.nhs.uk/finders/)
-* [Staging](http://connecting-to-services-staging.azurewebsites.net/)
+* [Live](https://beta.nhs.uk/finders/)
+* [Staging](https://connecting-to-services-staging.azurewebsites.net/)
 
 As the application is being developed, every branch of code has its own test
 environment automatically built and deployed via Heroku's
@@ -54,13 +54,22 @@ environment.
 | `SPLUNK_HEC_ENDPOINT`            | [HTTP Event Collector endpoint](http://dev.splunk.com/view/event-collector/SP-CAAAE7H) |                          | In `production` |
 | `LOG_LEVEL`                      | [bunyan log level](https://github.com/trentm/node-bunyan#levels)                       | Depends on `NODE_ENV`    |                 |
 
-## Development
+## Making changes
 
-If the application is to be run locally, a value will need to be set for `API_BASE_URL`.
-The value could be a local instance of the [API](https://github.com/nhsuk/nearby-services-api)
-or it could be the staging environment for the API. It depends on what changes
-are being worked on. A simple way to do that would be on the command line e.g.
-`API_BASE_URL=http://web.site npm run watch-dev`
+Once the repo has been cloned, execute `npm install` to download and install all
+required packages.
+
+Next, get the application running. Execute `API_BASE_URL=${apiUrl} npm run watch-dev`
+where `${apiUrl}` is the url of the api being used to retrieve nearby services.
+The api will be a version of [`nhsuk/nearby-services-api`](https://github.com/nhsuk/nearby-services-api).
+Any instance of the api can be used, typically it would be the staging instance
+but it might be a local version if changes are being made to the API at the same
+time. If the local version of the API is being used `${apiUrl}` would be
+http://localhost:3001 which gives the full command to run as:
+`API_BASE_URL=http://localhost:3001 npm run watch-dev`.
+
+The npm script `watch-dev` uses nodemon to auto reload the site when changes
+are made.
 
 ## Testing
 
